@@ -46,6 +46,7 @@ The owner is not a coder: explain things in plain language and give step-by-step
 - **Logo:** use the **black-and-white** logo (`swordes-logo-bw.png` → `images/swordes-logo.png`). **Do not use the pink/plum logo**, even though the mockup shows it. It is centered and links back to the home page (`<a class="logo" href="index.html">`) on Home, Tour Dates, Music and Contact. Videos has no logo, like the mockup.
 - **Icons:** the "Find me online" box uses the info icon (there's no laptop icon). XP icon copies are trimmed of empty padding so they read clearly at title-bar size.
 - **Pirate heads** (home page top corners): one spin takes exactly **2 seconds**. That's set by the frame timings in the `images/piraten007.gif` copy (16 frames alternating 0.13 s / 0.12 s).
+- **Top menu bar:** `position: sticky` with a solid `background-color: #e6e6e6` under its gradient, plus `<meta name="theme-color" content="#e6e6e6">` on every page. This makes the iPhone area behind the clock and battery gray instead of teal: Safari reads only a solid color from a fixed or sticky top element, not gradients. Keep both if the bar changes.
 - Must work on phones: no sideways scrolling, and boxes stack on narrow screens.
 - Otherwise, match the mockup as closely as possible.
 
