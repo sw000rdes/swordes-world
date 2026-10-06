@@ -29,7 +29,7 @@ The owner is not a coder: explain things in plain language and give step-by-step
   - Songs are listed in `SONGS` and skins in `SKINS`. A static site can't scan folders, so **a new .mp3 or .wsz must be copied into `audio/` or `skins/` AND added to these lists.**
   - `DEFAULT_SKIN` is the **Pirate** skin. Visitors switch skins with right-click → Skins.
   - Webamp normally starts downloading the first song (~3.7 MB) as soon as the page loads. `player.js` stops this by setting `preload="none"` on the audio element Webamp creates during `new Webamp(...)`, so songs only download when someone presses Play. Keep this when upgrading Webamp. (Using `appendTracks` instead of `initialTracks` also stops the download, but it breaks the Play button.)
-- `images/` — **web-sized copies** that the site actually uses. The background is 1920px wide (~260 KB) and the fav pic is 1000px wide (~235 KB).
+- `images/` — **web-sized copies** that the site actually uses. The background is 1920px wide (~260 KB) and the fav pic is 1000px wide (~235 KB). The GIFs are copied unchanged from `assets/gifs`.
 - `audio/` — copies of the MP3s from `assets/mp3s/` (320 kbps; titles come from the songs' own tags).
 - `skins/` — copies of the Winamp skins from `assets/winamp skins/`.
 - To publish, upload the HTML, CSS and JS plus `images/`, `audio/` and `skins/`. The `assets/` folder doesn't need to go up.
@@ -48,9 +48,15 @@ The owner is not a coder: explain things in plain language and give step-by-step
 - **Pirate heads** (home page top corners): one spin takes exactly **2 seconds**. That's set by the frame timings in the `images/piraten007.gif` copy (16 frames alternating 0.13 s / 0.12 s).
 - **Top menu bar:** `position: sticky` with a solid `background-color: #e6e6e6` under its gradient, plus `<meta name="theme-color" content="#e6e6e6">` on every page. This makes the iPhone area behind the clock and battery gray instead of teal: Safari reads only a solid color from a fixed or sticky top element, not gradients. Keep both if the bar changes.
 - **Treasure Map menu:** sits at the right end of the gray bar on every screen size (`margin-left: auto`). Its dropdown opens toward the left (`right: 0`), so it never runs off the screen.
-- **Music page GIF collage:** `.gif-collage` in `style.css` is a 384 x 192 box. Each GIF is positioned and sized in percentages of that box, about 24px apart on computers (the owner wants 15-25px gaps; never under 15px, even on the smallest phones) and kept straight (no tilts), so the cluster looks random but stays compact and shrinks evenly on phones. `chinesebuddha.gif` sits in the middle; it replaced `desert-buddha.gif`, which is no longer used.
-- **Tour Dates buttons:** same approach as the Music page. The ticket buttons are always centered and the "Admit One" GIF floats at the left edge (`position: absolute`). On phones the buttons have equal space on both sides, so the ticket never covers them.
-- **Music page buttons:** always centered in their box. The red music note floats at the left edge (`position: absolute`). On phones, the buttons have equal space on both sides, so the note never covers them.
+- **Music page** (`music.html`):
+  - **Buttons:** the 6 streaming buttons are always centered in their box (350px wide on computers). The red music note (`spinning-music-note.gif`) floats at the left edge with `position: absolute`: 55px wide, 46px from the left on computers; 34px wide, 6px from the left on phones. On phones the buttons are `calc(100% - 80px)` wide, so there's equal space on both sides and the note never covers them.
+  - **GIF collage:** under the buttons box are lotus, chinesebuddha (in the middle), buddha-montage, rainbow-buddha and om-tiny. `.gif-collage` is a 384 x 192 box, centered on every screen, and each GIF is placed and sized in percentages of it. So the cluster keeps its arrangement and shrinks evenly on phones. The gaps between GIFs are about 24px on computers, 21px on a 375px phone and 18px on a 320px phone: the owner wants **15-25px**. All GIFs stay **straight, no tilts**.
+  - The collage sits **47px** below the buttons box (`margin-top: 47px` = the normal 32px gap between boxes + 15px). A smaller top margin would merge into the 32px gap above it (margin collapsing), so set the full value.
+  - Older iPhones (before iOS 15) don't support `aspect-ratio`, so an `@supports not (aspect-ratio: 1)` fallback gives the box its shape with `padding-bottom: 50%`.
+  - `chinesebuddha.gif` replaced `desert-buddha.gif`. That one was 1.35 MB and isn't used; its original is still in `assets/gifs`.
+- **Tour Dates page** (`tour-dates.html`):
+  - **"Swordes Tour 2026" box:** the ticket buttons are always centered. On computers they're 470px wide, so "San Francisco (DJ set) 11/6" fits on one line. The "Admit One" GIF floats at the left edge with `position: absolute`: 72px wide, 12px from the left on computers; 36px wide at the left edge on phones. On phones the buttons are `calc(100% - 84px)` wide, so they stay centered and the ticket never covers them. On very small phones (360px wide or less) the button text drops to 18px so the city names fit; only the "(DJ set)" one wraps.
+  - **"Don't see ur city?" box:** a separate gray box under the tour box, with the info icon. It holds the text "Enter ur email to be notified when new dates are announced." plus the Buttondown email sign-up ("Notify Me <3").
 - Must work on phones: no sideways scrolling, and boxes stack on narrow screens.
 - Otherwise, match the mockup as closely as possible.
 
@@ -70,7 +76,7 @@ The owner is not a coder: explain things in plain language and give step-by-step
 - `.gitignore` keeps `assets/` (the originals, including the mockup), `.claude/` and `.DS_Store` off GitHub. Only the site files go up.
 - Commits use the name `sw000rdes` with GitHub's noreply email (set in this repo's local git config), so the owner's personal email stays private.
 - To update the live site: commit the changes, then `git push`. GitHub rebuilds the site in about a minute.
-- **Cache-busting:** GitHub Pages lets browsers reuse files for 10 minutes (`max-age=600`). That once made an iPhone show the new Music page with the old `style.css`, which scrambled the GIF collage. Every page loads `style.css`, `script.js` and `player.js` with a version tag (`?v=...`). **When publishing a change to any of those three files, bump the `?v=` value in all 5 HTML pages.**
+- **Cache-busting:** GitHub Pages lets browsers reuse files for 10 minutes (`max-age=600`). That once made an iPhone show the new Music page with the old `style.css`, which scrambled the GIF collage. Every page loads `style.css`, `script.js` and `player.js` with a version tag (`?v=...`). **When publishing a change to any of those three files, bump the `?v=` value in all 5 HTML pages.** The current value is `?v=2026-10-06d`.
 - Pushing needs the GitHub CLI (`gh`), logged in as sw000rdes. It isn't installed on this Mac. For the first publish it was downloaded into a temporary session folder that may be gone later, but the login is saved in the macOS keychain. This repo's git config points its credential helper at that temporary `gh` path, so if a push fails to authenticate, download `gh` again and re-point the helper.
 - `http.postBuffer` is raised in this repo's git config so large MP3 uploads don't fail.
 
