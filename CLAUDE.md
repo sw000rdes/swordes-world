@@ -57,7 +57,9 @@ The owner is not a coder: explain things in plain language and give step-by-step
 
 ## Publishing (GitHub Pages)
 
-- Live site: **https://sw000rdes.github.io/swordes-world/**
+- Live site: **https://swordes.world** (custom domain; www.swordes.world redirects to it). The old address, sw000rdes.github.io/swordes-world, now redirects to swordes.world.
+- The `CNAME` file in the repo root holds the custom domain. **Don't delete it**, or the domain disconnects.
+- DNS is at **Spaceship** (nameservers launch1/launch2.spaceship.net): four `A` records and four `AAAA` records on `@` pointing to GitHub Pages, plus a `CNAME` record from `www` to `sw000rdes.github.io`.
 - Repository (public): **https://github.com/sw000rdes/swordes-world**, branch `main`. Pages serves the repository root.
 - `.gitignore` keeps `assets/` (the originals, including the mockup), `.claude/` and `.DS_Store` off GitHub. Only the site files go up.
 - Commits use the name `sw000rdes` with GitHub's noreply email (set in this repo's local git config), so the owner's personal email stays private.
