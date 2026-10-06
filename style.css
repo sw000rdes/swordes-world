@@ -1,0 +1,742 @@
+/* ============================================
+   swordes.world - shared styles for every page
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #2aa7b8;
+}
+
+body {
+  margin: 0;
+  padding-top: 40px; /* room for the top bar */
+  min-height: 100vh;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  color: #000;
+}
+
+/* One stationary ocean picture that fills the screen; the page scrolls over it.
+   (Done this way instead of "background-attachment: fixed" so it also stays put on iPhones.) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #2aa7b8 url("images/ocean-bg.jpg") center / cover no-repeat;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: #1a5c9e;
+}
+
+/* ---------- Top bar + Treasure Map menu ---------- */
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  padding: 0 14px;
+  background: linear-gradient(#e6e6e6, #cfcfcf);
+  border-bottom: 2px solid #8a8a8a;
+  font-style: italic;
+  font-size: 17px;
+}
+
+.topbar .site-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #000;
+  text-decoration: none;
+}
+
+.topbar .site-name img {
+  width: 22px;
+  height: 22px;
+  image-rendering: pixelated;
+}
+
+.menu {
+  position: relative;
+}
+
+.menu-button {
+  font: inherit;
+  font-style: italic;
+  color: #000;
+  background: none;
+  border: none;
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+.menu-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  min-width: 130px;
+  background: #d4d4d4;
+  border: 1px solid #8a8a8a;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.menu.open .menu-list {
+  display: block;
+}
+
+.menu-list a {
+  display: block;
+  padding: 3px 10px;
+  color: #000;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.menu-list a:hover,
+.menu-list a:focus {
+  background: #1a5c9e;
+  color: #fff;
+}
+
+/* ---------- Page layout ---------- */
+
+.page {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 24px 0 60px;
+}
+
+/* The logo is a link back to the home page, centered on every page */
+.logo {
+  display: block;
+  width: 460px;
+  max-width: 80%;
+  margin: 10px auto 30px;
+}
+
+.logo img {
+  display: block;
+  width: 100%;
+}
+
+.corner-pirate {
+  position: absolute;
+  top: 50px;
+  width: 92px;
+}
+
+.corner-pirate.left {
+  left: 6px;
+}
+
+.corner-pirate.right {
+  right: 6px;
+}
+
+/* ---------- Windows (the gray boxes) ---------- */
+
+.window {
+  margin: 0 0 32px;
+  background: #c9c9c9;
+  border: 1px solid #f2f2f2;
+  border-right-color: #6d6d6d;
+  border-bottom: 3px solid #6d6d6d;
+}
+
+.window-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 3px;
+  padding: 3px 6px;
+  font-size: 17px;
+  font-weight: normal;
+  background: linear-gradient(to right, #a9a9a9, #e9e9e9 55%, #f4f4f4);
+}
+
+.window-title img {
+  width: 26px;
+  height: 26px;
+}
+
+.window-body {
+  padding: 16px 20px 20px;
+  text-align: center;
+}
+
+/* ---------- Beveled buttons ---------- */
+
+.button {
+  display: block;
+  padding: 12px 10px;
+  color: #1a5c9e;
+  font-family: inherit;
+  font-style: italic;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  background: #cdcdcd;
+  border: 2px solid;
+  border-color: #f2f2f2 #6d6d6d #6d6d6d #f2f2f2;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #d9d9d9;
+}
+
+.button:active {
+  border-color: #6d6d6d #f2f2f2 #f2f2f2 #6d6d6d;
+}
+
+.button-row {
+  display: flex;
+}
+
+.button-row .button {
+  flex: 1;
+}
+
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.big .button {
+  font-size: 36px;
+  padding: 10px;
+}
+
+/* ---------- Email sign-up (placeholder) ---------- */
+
+.signup {
+  display: flex;
+  gap: 14px;
+}
+
+.signup input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  font-family: inherit;
+  font-size: 17px;
+  background: #e8e8e8;
+  border: none;
+}
+
+.signup .button {
+  flex: 0 0 auto;
+  min-width: 160px;
+  font-style: normal;
+  font-size: 20px;
+}
+
+/* ---------- Home page ---------- */
+
+.welcome-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.welcome-heading h1 {
+  margin: 0;
+  font-size: 42px;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.welcome-heading img {
+  width: 82px;
+  flex: 0 0 auto;
+}
+
+.welcome-text {
+  margin: 14px 0 8px;
+  line-height: 1.3;
+}
+
+.announcement-link {
+  display: block;
+  font-size: 34px;
+  font-style: italic;
+}
+
+/* Music player box. Black while loading, then Webamp (big screens) or the simple player (phones). */
+.player-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 464px;
+  color: #ccc;
+  font-style: italic;
+  background: #000;
+}
+
+.webamp-box {
+  position: relative;
+  height: 464px; /* Webamp's windows are laid out to fit this exactly */
+}
+
+.simple-player {
+  padding: 12px;
+  text-align: left;
+  background: #000;
+  border: 6px solid #2a5fa8;
+  box-shadow: inset 0 0 0 2px #7fa6dd;
+}
+
+.simple-player .now-playing {
+  margin: 0 0 10px;
+  color: #ff9ad5;
+  font-style: italic;
+}
+
+.simple-player audio {
+  display: block;
+  width: 100%;
+}
+
+.simple-player ol {
+  margin: 12px 0 0;
+  padding-left: 28px;
+  color: #ccc;
+}
+
+.simple-player li button {
+  width: 100%;
+  padding: 6px 4px;
+  font-family: inherit;
+  font-size: 17px;
+  text-align: left;
+  color: #ccc;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.simple-player li button.playing {
+  color: #fff;
+  background: #2a5fa8;
+}
+
+.find-me {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.find-me .button-row {
+  flex: 1;
+}
+
+.find-me > img {
+  width: 47px;
+  flex: 0 0 auto;
+}
+
+.know-more {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.know-more img {
+  display: block;
+  margin: 0 auto;
+}
+
+.know-more .enter img {
+  width: 90px;
+  margin-top: 8px;
+}
+
+/* ---------- Videos page ---------- */
+
+.announcement-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.announcement-row p {
+  flex: 1;
+  margin: 0;
+  font-size: 34px;
+  font-style: italic;
+  line-height: 1.15;
+}
+
+.announcement-row img {
+  width: 170px;
+  flex: 0 0 auto;
+}
+
+.video-area {
+  position: relative;
+  width: 86%;
+  margin: 0 auto 40px;
+}
+
+.video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.eye {
+  position: absolute;
+  top: 18%;
+  right: -60px;
+  width: 66px;
+  border: 1px solid #fff;
+}
+
+.ankhs {
+  position: absolute;
+  left: -8%;
+  bottom: -50px;
+  display: flex;
+  gap: 16px;
+}
+
+.ankhs img {
+  width: 80px;
+}
+
+.gate-of-knowledge {
+  display: block;
+  width: 468px;
+  max-width: 100%;
+  margin: 60px auto 40px;
+}
+
+.garden {
+  position: relative;
+  width: 64%;
+  margin: 70px auto 40px;
+}
+
+.garden .gate {
+  display: block;
+  width: 100%;
+}
+
+.garden .shark {
+  position: absolute;
+  top: -80px;
+  left: -16%;
+  width: 165px;
+}
+
+.garden .sorceress {
+  position: absolute;
+  top: -110px;
+  right: -12%;
+  width: 155px;
+}
+
+/* ---------- Tour Dates page ---------- */
+
+.tour-body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.tour-body > img {
+  width: 75px;
+  flex: 0 0 auto;
+}
+
+.tour-body .button-stack {
+  flex: 1;
+  margin-right: 95px; /* keeps the buttons centered, like the mockup */
+}
+
+.notify-text {
+  margin: 22px 0 14px;
+  color: #1a5c9e;
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+.music-gif {
+  display: block;
+  width: 110px;
+  margin: 0 auto;
+}
+
+/* ---------- Music page ---------- */
+
+.tagline {
+  margin: -20px 0 22px;
+  font-size: 44px;
+  font-style: italic;
+  font-weight: normal;
+  text-align: center;
+}
+
+.music-body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.music-body > img {
+  width: 55px;
+  flex: 0 0 auto;
+  margin-left: 40px;
+}
+
+.music-body .button-stack {
+  flex: 0 1 350px;
+  margin-left: 50px;
+}
+
+.music-body .button {
+  font-size: 30px;
+  padding: 10px;
+}
+
+/* ---------- Contact page ---------- */
+
+.booking {
+  display: flex;
+  gap: 30px;
+  padding-top: 8px;
+}
+
+.booking > div {
+  flex: 1;
+}
+
+.booking h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: normal;
+}
+
+.contact .button {
+  font-size: 20px;
+  word-break: break-word;
+}
+
+.contact-pirate {
+  position: relative;
+  width: 260px;
+  margin: 0 auto;
+}
+
+.contact-pirate .betty {
+  display: block;
+  width: 175px;
+}
+
+.contact-pirate .bubble {
+  position: absolute;
+  top: -20px;
+  left: 100px;
+  width: 270px;
+  max-width: none;
+}
+
+/* ---------- Phones ---------- */
+
+@media (max-width: 740px) {
+  body {
+    font-size: 16px;
+  }
+
+  .topbar {
+    gap: 20px;
+  }
+
+  .page {
+    padding: 16px 16px 40px;
+  }
+
+  .corner-pirate {
+    width: 54px;
+  }
+
+  .logo {
+    max-width: 62%;
+  }
+
+  .window-body {
+    padding: 12px;
+  }
+
+  .button {
+    font-size: 16px;
+  }
+
+  .button-row {
+    flex-wrap: wrap;
+  }
+
+  .button-row .button {
+    flex: 1 1 33%;
+  }
+
+  .welcome-heading h1 {
+    font-size: 26px;
+  }
+
+  .welcome-heading img {
+    width: 48px;
+  }
+
+  .announcement-link {
+    font-size: 24px;
+  }
+
+  .player-loading {
+    min-height: 180px;
+  }
+
+  .find-me {
+    gap: 6px;
+  }
+
+  .find-me > img {
+    width: 28px;
+  }
+
+  .signup {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .announcement-row p {
+    font-size: 22px;
+  }
+
+  .announcement-row img {
+    width: 90px;
+  }
+
+  .video-area {
+    width: 100%;
+  }
+
+  .eye {
+    right: 4px;
+    top: auto;
+    bottom: -30px;
+    width: 46px;
+  }
+
+  .ankhs {
+    left: 0;
+    bottom: -40px;
+  }
+
+  .ankhs img {
+    width: 44px;
+  }
+
+  .garden {
+    width: 78%;
+  }
+
+  .garden .shark {
+    top: -50px;
+    width: 100px;
+  }
+
+  .garden .sorceress {
+    top: -60px;
+    width: 80px;
+  }
+
+  .big .button,
+  .music-body .button {
+    font-size: 22px;
+  }
+
+  .tour-body,
+  .music-body {
+    gap: 10px;
+  }
+
+  .tour-body > img {
+    width: 40px;
+  }
+
+  .tour-body .button-stack {
+    margin-right: 0;
+  }
+
+  .music-body > img {
+    width: 34px;
+    margin-left: 0;
+  }
+
+  .music-body .button-stack {
+    flex: 1;
+    margin-left: 0;
+  }
+
+  .notify-text {
+    font-size: 18px;
+  }
+
+  .tagline {
+    font-size: 28px;
+    margin-top: -14px;
+  }
+
+  .booking {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact .button {
+    font-size: 16px;
+  }
+
+  .contact-pirate {
+    width: 220px;
+    margin-top: 30px;
+  }
+
+  .contact-pirate .betty {
+    width: 140px;
+  }
+
+  .contact-pirate .bubble {
+    left: 70px;
+    width: 160px;
+  }
+}

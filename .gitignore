@@ -1,0 +1,6 @@
+# Not published to GitHub
+# Original files stay on this computer only; the site uses the copies in images/, audio/ and skins/
+assets/
+# Local preview settings and Mac system files
+.claude/
+.DS_Store
