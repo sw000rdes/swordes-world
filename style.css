@@ -71,8 +71,10 @@ a {
   image-rendering: pixelated;
 }
 
+/* The Treasure Map menu sits at the right end of the bar on every screen size */
 .menu {
   position: relative;
+  margin-left: auto;
 }
 
 .menu-button {
@@ -89,7 +91,7 @@ a {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0; /* opens toward the left, so it never runs off the right edge */
   margin: 0;
   padding: 4px 0;
   list-style: none;
@@ -506,21 +508,23 @@ a {
   text-align: center;
 }
 
+/* Buttons are centered in the box; the music note floats at the left edge */
 .music-body {
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: 20px;
+  justify-content: center;
 }
 
 .music-body > img {
+  position: absolute;
+  top: 50%;
+  left: 46px;
   width: 55px;
-  flex: 0 0 auto;
-  margin-left: 40px;
+  transform: translateY(-50%);
 }
 
 .music-body .button-stack {
   flex: 0 1 350px;
-  margin-left: 50px;
 }
 
 .music-body .button {
@@ -685,8 +689,7 @@ a {
     font-size: 22px;
   }
 
-  .tour-body,
-  .music-body {
+  .tour-body {
     gap: 10px;
   }
 
@@ -699,13 +702,14 @@ a {
   }
 
   .music-body > img {
+    left: 6px;
     width: 34px;
-    margin-left: 0;
   }
 
+  /* Equal space on both sides keeps the buttons centered and clear of the note */
   .music-body .button-stack {
-    flex: 1;
-    margin-left: 0;
+    flex: 0 1 auto;
+    width: calc(100% - 80px);
   }
 
   .notify-text {
