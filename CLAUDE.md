@@ -11,7 +11,7 @@ The owner is not a coder: explain things in plain language and give step-by-step
 | Home | `index.html` | Welcome box, announcement (links to Tour Dates), fav pic, email sign-up, music player (Webamp), social links, "Enter" button (links to Videos) |
 | Videos | `videos.html` | Announcement, 3 YouTube embeds (order from `links.txt`), "Gate Of Knowledge" button (Libertalia on Wikipedia), decorative GIFs |
 | Tour Dates | `tour-dates.html` | "Swordes Tour 2026" ticket buttons + "notify me" email sign-up |
-| Music | `music.html` | "To listen is to understand." + buttons to streaming services |
+| Music | `music.html` | "To listen is to understand." + buttons to streaming services + a GIF collage under them (lotus, chinesebuddha, buddha-montage, rainbow-buddha, om-tiny) |
 | Contact | `contact.html` | Booking emails (Europe / rest of world) + all other inquiries |
 
 **Email sign-ups:** both forms ("I'm Ready" on Home, "Notify Me <3" on Tour Dates) are plain HTML forms that post to the owner's **Buttondown** newsletter (`https://buttondown.com/api/emails/embed-subscribe/swordes`, field `name="email"`). Visitors land on Buttondown's own page afterwards. No JavaScript, and they keep the site's styling, not Buttondown's.
@@ -48,6 +48,7 @@ The owner is not a coder: explain things in plain language and give step-by-step
 - **Pirate heads** (home page top corners): one spin takes exactly **2 seconds**. That's set by the frame timings in the `images/piraten007.gif` copy (16 frames alternating 0.13 s / 0.12 s).
 - **Top menu bar:** `position: sticky` with a solid `background-color: #e6e6e6` under its gradient, plus `<meta name="theme-color" content="#e6e6e6">` on every page. This makes the iPhone area behind the clock and battery gray instead of teal: Safari reads only a solid color from a fixed or sticky top element, not gradients. Keep both if the bar changes.
 - **Treasure Map menu:** sits at the right end of the gray bar on every screen size (`margin-left: auto`). Its dropdown opens toward the left (`right: 0`), so it never runs off the screen.
+- **Music page GIF collage:** `.gif-collage` in `style.css` is a 384 x 192 box. Each GIF is positioned and sized in percentages of that box, about 24px apart on computers (the owner wants 15-25px gaps; never under 15px, even on the smallest phones) and kept straight (no tilts), so the cluster looks random but stays compact and shrinks evenly on phones. `chinesebuddha.gif` sits in the middle; it replaced `desert-buddha.gif`, which is no longer used.
 - **Music page buttons:** always centered in their box. The red music note floats at the left edge (`position: absolute`). On phones, the buttons have equal space on both sides, so the note never covers them.
 - Must work on phones: no sideways scrolling, and boxes stack on narrow screens.
 - Otherwise, match the mockup as closely as possible.

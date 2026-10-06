@@ -532,6 +532,53 @@ a {
   padding: 10px;
 }
 
+/* GIF collage under the Music page buttons: a tight, slightly random cluster
+   with about 24px between neighbours and no tilts. Positions and sizes are
+   percentages of a 384 x 192 box, so the arrangement shrinks evenly on phones
+   (gaps stay between 15px and 25px on every screen size). */
+.gif-collage {
+  position: relative;
+  width: 384px;
+  max-width: 100%;
+  aspect-ratio: 384 / 192;
+  margin: 47px auto 0; /* 47px = the box's normal 32px gap + 15px lower, as requested */
+}
+
+.gif-collage img {
+  position: absolute;
+  height: auto;
+}
+
+.gif-collage .g-lotus {
+  left: 0;
+  top: 8.33%;
+  width: 28.13%;
+}
+
+.gif-collage .g-chinese {
+  left: 34.38%;
+  top: 0;
+  width: 39.06%;
+}
+
+.gif-collage .g-montage {
+  left: 79.69%;
+  top: 0;
+  width: 18.75%;
+}
+
+.gif-collage .g-rainbow {
+  left: 79.69%;
+  top: 50%;
+  width: 20.31%;
+}
+
+.gif-collage .g-om {
+  left: 17.19%;
+  top: 77.08%;
+  width: 10.94%;
+}
+
 /* ---------- Contact page ---------- */
 
 .booking {
