@@ -549,6 +549,16 @@ a {
   height: auto;
 }
 
+/* Older iPhones (Safari before iOS 15) don't understand aspect-ratio, which
+   would leave the collage box with no height. This gives it the same
+   2:1 shape a different way. */
+@supports not (aspect-ratio: 1) {
+  .gif-collage {
+    height: 0;
+    padding-bottom: 50%;
+  }
+}
+
 .gif-collage .g-lotus {
   left: 0;
   top: 8.33%;

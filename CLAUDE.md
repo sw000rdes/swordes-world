@@ -69,6 +69,7 @@ The owner is not a coder: explain things in plain language and give step-by-step
 - `.gitignore` keeps `assets/` (the originals, including the mockup), `.claude/` and `.DS_Store` off GitHub. Only the site files go up.
 - Commits use the name `sw000rdes` with GitHub's noreply email (set in this repo's local git config), so the owner's personal email stays private.
 - To update the live site: commit the changes, then `git push`. GitHub rebuilds the site in about a minute.
+- **Cache-busting:** GitHub Pages lets browsers reuse files for 10 minutes (`max-age=600`). That once made an iPhone show the new Music page with the old `style.css`, which scrambled the GIF collage. Every page loads `style.css`, `script.js` and `player.js` with a version tag (`?v=...`). **When publishing a change to any of those three files, bump the `?v=` value in all 5 HTML pages.**
 - Pushing needs the GitHub CLI (`gh`), logged in as sw000rdes. It isn't installed on this Mac. For the first publish it was downloaded into a temporary session folder that may be gone later, but the login is saved in the macOS keychain. This repo's git config points its credential helper at that temporary `gh` path, so if a push fails to authenticate, download `gh` again and re-point the helper.
 - `http.postBuffer` is raised in this repo's git config so large MP3 uploads don't fail.
 
