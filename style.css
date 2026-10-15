@@ -275,6 +275,11 @@ a {
   flex: 0 0 auto;
 }
 
+/* Left mermaid is flipped so the two sit back to back. */
+.welcome-heading img.mirrored {
+  transform: scaleX(-1);
+}
+
 .welcome-text {
   margin: 14px 0 8px;
   line-height: 1.3;
