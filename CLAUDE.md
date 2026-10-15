@@ -77,7 +77,8 @@ The owner is not a coder: explain things in plain language and give step-by-step
 - Commits use the name `sw000rdes` with GitHub's noreply email (set in this repo's local git config), so the owner's personal email stays private.
 - To update the live site: commit the changes, then `git push`. GitHub rebuilds the site in about a minute.
 - **Cache-busting:** GitHub Pages lets browsers reuse files for 10 minutes (`max-age=600`). That once made an iPhone show the new Music page with the old `style.css`, which scrambled the GIF collage. Every page loads `style.css`, `script.js` and `player.js` with a version tag (`?v=...`). **When publishing a change to any of those three files, bump the `?v=` value in all 5 HTML pages.** The current value is `?v=2026-10-06d`.
-- Pushing needs the GitHub CLI (`gh`), logged in as sw000rdes. It isn't installed on this Mac. For the first publish it was downloaded into a temporary session folder that may be gone later, but the login is saved in the macOS keychain. This repo's git config points its credential helper at that temporary `gh` path, so if a push fails to authenticate, download `gh` again and re-point the helper.
+- Pushing needs the GitHub CLI (`gh`), logged in as sw000rdes. On this Mac (moved here from the old laptop in Oct 2026) it's installed at `~/.local/bin/gh` (v2.102.0, a permanent folder, not on the PATH), and the login is saved in this Mac's keychain. This repo's git config points its credential helper at that path. If a push ever fails to sign in, run `~/.local/bin/gh auth login --web` and approve the code at github.com/login/device.
+- The owner sometimes uploads files straight on the GitHub website (e.g. `newsletter/october/images/` on Oct 12, 2026). Run `git pull` before starting work so this folder has them.
 - `http.postBuffer` is raised in this repo's git config so large MP3 uploads don't fail.
 
 ## Preview
