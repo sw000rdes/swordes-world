@@ -8,12 +8,12 @@ var MERCH_STORE_URL = "";
 
 // The "Treasure Map" menu. Edit this list to change the menu on every page at once.
 var MENU_LINKS = [
-  { label: "Home", href: "index.html" },
-  { label: "Music", href: "music.html" },
-  { label: "Videos", href: "videos.html" },
-  { label: "Tour Dates", href: "tour-dates.html" },
+  { label: "Home", href: "/" },
+  { label: "Music", href: "/music" },
+  { label: "Videos", href: "/video" },
+  { label: "Tour Dates", href: "/tour" },
   { label: "Merchandise", href: "#merch" },
-  { label: "Contact", href: "contact.html" }
+  { label: "Contact", href: "/contact" }
 ];
 
 // ---- Build the top bar ----
@@ -25,7 +25,7 @@ if (topbar) {
 
   topbar.className = "topbar";
   topbar.innerHTML =
-    '<a class="site-name" href="index.html"><img src="images/favicon.png" alt="">swordes.world</a>' +
+    '<a class="site-name" href="/"><img src="images/favicon.png" alt="">swordes.world</a>' +
     '<nav class="menu">' +
     '<button class="menu-button" type="button" aria-expanded="false">Treasure Map &#9662;</button>' +
     '<ul class="menu-list">' + items + "</ul>" +

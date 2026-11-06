@@ -6,19 +6,21 @@ The owner is not a coder: explain things in plain language and give step-by-step
 
 ## Pages
 
-| Page | File | What's on it |
-|---|---|---|
-| Home | `index.html` | Welcome box, announcement (links to Tour Dates), fav pic, email sign-up, music player (Webamp), social links, "Enter" button (links to Videos) |
-| Videos | `videos.html` | Announcement, 3 YouTube embeds (order from `links.txt`), "Gate Of Knowledge" button (Libertalia on Wikipedia), decorative GIFs |
-| Tour Dates | `tour-dates.html` | "Swordes Tour 2026" box with ticket buttons, then a separate "Don't see ur city?" box (info icon) with the "notify me" email sign-up |
-| Music | `music.html` | "To listen is to understand." + buttons to streaming services + a GIF collage under them (lotus, chinesebuddha, buddha-montage, rainbow-buddha, om-tiny) |
-| Contact | `contact.html` | Booking emails (Europe / rest of world) + all other inquiries |
+| Page | File | Address | What's on it |
+|---|---|---|---|
+| Home | `index.html` | `/` | Welcome box, announcement (links to Tour Dates), fav pic, email sign-up, music player (Webamp), social links, "Enter" button (links to Videos) |
+| Videos | `video.html` | `/video` | Announcement, 3 YouTube embeds (order from `links.txt`), "Gate Of Knowledge" button (Libertalia on Wikipedia), decorative GIFs |
+| Tour Dates | `tour.html` | `/tour` | "Swordes Tour 2026" box with ticket buttons, then a separate "Don't see ur city?" box (info icon) with the "notify me" email sign-up |
+| Music | `music.html` | `/music` | "To listen is to understand." + buttons to streaming services + a GIF collage under them (lotus, chinesebuddha, buddha-montage, rainbow-buddha, om-tiny) |
+| Contact | `contact.html` | `/contact` | Booking emails (Europe / rest of world) + all other inquiries |
 
 **Email sign-ups:** both forms ("I'm Ready" on Home, "Notify Me <3" on Tour Dates) are plain HTML forms that post to the owner's **Buttondown** newsletter (`https://buttondown.com/api/emails/embed-subscribe/swordes`, field `name="email"`). Visitors land on Buttondown's own page afterwards. No JavaScript, and they keep the site's styling, not Buttondown's.
 
 ## How the files are organized
 
-- `index.html`, `videos.html`, `tour-dates.html`, `music.html`, `contact.html` — the five pages.
+- `index.html`, `video.html`, `tour.html`, `music.html`, `contact.html` — the five pages.
+- **Short addresses:** every link uses `/`, `/music`, `/video`, `/tour`, `/contact` (no `.html`). GitHub Pages serves `tour.html` at `/tour` by itself. Links start with `/`, which works because the site sits at the root of swordes.world. The file name decides the address, so renaming a page changes its address.
+- `tour-dates.html` and `videos.html` are tiny **forwarding pages** for the old addresses (renamed Nov 5, 2026). They send visitors to `/tour` and `/video`, so links people already shared keep working. Keep them.
 - `style.css` — all styling for every page, with a phone section (`@media (max-width: 740px)`) at the end.
 - `script.js` — shared JavaScript:
   - Builds the top bar and the **Treasure Map** dropdown on every page from `MENU_LINKS`. Edit the menu there, not in the HTML.
@@ -36,26 +38,26 @@ The owner is not a coder: explain things in plain language and give step-by-step
 - `assets/` — the owner's **originals. Never modify, move or delete them.** To use a new asset, make a web-sized copy in `images/`.
   - `assets/mockup/swordes.world mockup.pdf` — the original 5-page design mockup.
 - `links.txt` — the owner's list of every link and email address. It's the source of truth: when it and the mockup disagree, follow `links.txt`.
-- `.claude/launch.json` — preview server config (`python3 -m http.server 8000`).
+- `.claude/launch.json` and `.claude/preview-server.py` — the preview server. It works like `python3 -m http.server 8000`, but it also serves `/tour` from `tour.html`, like GitHub Pages does.
 
 ## Design preferences
 
 - **Look:** late-90s / early-2000s web. Gray beveled "windows" with gradient title bars and XP-style icons, beveled gray buttons with blue italic Times text, animated GIFs, a pirate / mystical / ocean theme.
 - **Font:** Times New Roman everywhere.
 - **Background:** use the **teal** ocean (`images/ocean-bg.jpg`, made from `swordes-world_oceanbg-teal.jpg`), **not** the plain blue one. It must be **one stationary picture** that fills the screen while the page scrolls over it. Never tile or stack it like the mockup. It's done with a fixed `body::before`, so it also stays put on iPhones.
-- **Logo:** use the **black-and-white** logo (`swordes-logo-bw.png` → `images/swordes-logo.png`). **Do not use the pink/plum logo**, even though the mockup shows it. It is centered and links back to the home page (`<a class="logo" href="index.html">`) on Home, Tour Dates, Music and Contact. Videos has no logo, like the mockup.
+- **Logo:** use the **black-and-white** logo (`swordes-logo-bw.png` → `images/swordes-logo.png`). **Do not use the pink/plum logo**, even though the mockup shows it. It is centered and links back to the home page (`<a class="logo" href="/">`) on Home, Tour Dates, Music and Contact. Videos has no logo, like the mockup.
 - **Icons:** the "Find me online" box uses the info icon (there's no laptop icon). XP icon copies are trimmed of empty padding so they read clearly at title-bar size.
 - **Mermaids** (either side of "Welcome to swordes.world" on the home page): the **left one is mirrored** (`class="mirrored"`, `transform: scaleX(-1)`), so the two sit **back to back**, each with her back to the title. The owner tried nudging them closer to the title and chose to keep the original spacing.
 - **Pirate heads** (home page top corners): one spin takes exactly **2 seconds**. That's set by the frame timings in the `images/piraten007.gif` copy (16 frames alternating 0.13 s / 0.12 s).
 - **Top menu bar:** `position: sticky` with a solid `background-color: #e6e6e6` under its gradient, plus `<meta name="theme-color" content="#e6e6e6">` on every page. This makes the iPhone area behind the clock and battery gray instead of teal: Safari reads only a solid color from a fixed or sticky top element, not gradients. Keep both if the bar changes.
 - **Treasure Map menu:** sits at the right end of the gray bar on every screen size (`margin-left: auto`). Its dropdown opens toward the left (`right: 0`), so it never runs off the screen.
-- **Music page** (`music.html`):
+- **Music page** (`music.html`, `/music`):
   - **Buttons:** the 6 streaming buttons are always centered in their box (350px wide on computers). The red music note (`spinning-music-note.gif`) floats at the left edge with `position: absolute`: 55px wide, 46px from the left on computers; 34px wide, 6px from the left on phones. On phones the buttons are `calc(100% - 80px)` wide, so there's equal space on both sides and the note never covers them.
   - **GIF collage:** under the buttons box are lotus, chinesebuddha (in the middle), buddha-montage, rainbow-buddha and om-tiny. `.gif-collage` is a 384 x 192 box, centered on every screen, and each GIF is placed and sized in percentages of it. So the cluster keeps its arrangement and shrinks evenly on phones. The gaps between GIFs are about 24px on computers, 21px on a 375px phone and 18px on a 320px phone: the owner wants **15-25px**. All GIFs stay **straight, no tilts**.
   - The collage sits **47px** below the buttons box (`margin-top: 47px` = the normal 32px gap between boxes + 15px). A smaller top margin would merge into the 32px gap above it (margin collapsing), so set the full value.
   - Older iPhones (before iOS 15) don't support `aspect-ratio`, so an `@supports not (aspect-ratio: 1)` fallback gives the box its shape with `padding-bottom: 50%`.
   - `chinesebuddha.gif` replaced `desert-buddha.gif`. That one was 1.35 MB and isn't used; its original is still in `assets/gifs`.
-- **Tour Dates page** (`tour-dates.html`):
+- **Tour Dates page** (`tour.html`, `/tour`):
   - **"Swordes Tour 2026" box:** the ticket buttons are always centered. On computers they're 470px wide (sized back when a "San Francisco (DJ set) 11/6" button needed to fit on one line; that button was removed on Oct 28, 2026). The "Admit One" GIF floats at the left edge with `position: absolute`: 72px wide, 12px from the left on computers; 36px wide at the left edge on phones. On phones the buttons are `calc(100% - 84px)` wide, so they stay centered and the ticket never covers them. On very small phones (360px wide or less) the button text drops to 18px so the city names fit.
   - **"Don't see ur city?" box:** a separate gray box under the tour box, with the info icon. It holds the text "Enter ur email to be notified when new dates are announced." plus the Buttondown email sign-up ("Notify Me <3").
 - Must work on phones: no sideways scrolling, and boxes stack on narrow screens.
@@ -77,7 +79,7 @@ The owner is not a coder: explain things in plain language and give step-by-step
 - `.gitignore` keeps `assets/` (the originals, including the mockup), `.claude/` and `.DS_Store` off GitHub. Only the site files go up.
 - Commits use the name `sw000rdes` with GitHub's noreply email (set in this repo's local git config), so the owner's personal email stays private.
 - To update the live site: commit the changes, then `git push`. GitHub rebuilds the site in about a minute.
-- **Cache-busting:** GitHub Pages lets browsers reuse files for 10 minutes (`max-age=600`). That once made an iPhone show the new Music page with the old `style.css`, which scrambled the GIF collage. Every page loads `style.css`, `script.js` and `player.js` with a version tag (`?v=...`). **When publishing a change to any of those three files, bump the `?v=` value in all 5 HTML pages.** The current value is `?v=2026-10-15a`.
+- **Cache-busting:** GitHub Pages lets browsers reuse files for 10 minutes (`max-age=600`). That once made an iPhone show the new Music page with the old `style.css`, which scrambled the GIF collage. Every page loads `style.css`, `script.js` and `player.js` with a version tag (`?v=...`). **When publishing a change to any of those three files, bump the `?v=` value in all 5 HTML pages.** The current value is `?v=2026-11-05a`.
 - Pushing needs the GitHub CLI (`gh`), logged in as sw000rdes. On this Mac (moved here from the old laptop in Oct 2026) it's installed at `~/.local/bin/gh` (v2.102.0, a permanent folder, not on the PATH), and the login is saved in this Mac's keychain. This repo's git config points its credential helper at that path. If a push ever fails to sign in, run `~/.local/bin/gh auth login --web` and approve the code at github.com/login/device.
 - The owner sometimes uploads files straight on the GitHub website (e.g. `newsletter/october/images/` on Oct 12, 2026). Run `git pull` before starting work so this folder has them.
 - `http.postBuffer` is raised in this repo's git config so large MP3 uploads don't fail.
@@ -85,7 +87,7 @@ The owner is not a coder: explain things in plain language and give step-by-step
 ## Preview
 
 ```bash
-cd ~/Desktop/swordes-world && python3 -m http.server 8000
+cd ~/Desktop/swordes-world && python3 .claude/preview-server.py
 ```
 
-Then open http://localhost:8000. YouTube videos won't play when a page is opened by double-clicking the file, so preview through the server.
+Then open http://localhost:8000. (The plain `python3 -m http.server` can't open the short addresses like `/tour`.) Inside the Claude app, run it in the Terminal panel: the app's own preview button can't read the Desktop folder on this Mac. YouTube videos won't play when a page is opened by double-clicking the file, so preview through the server.
